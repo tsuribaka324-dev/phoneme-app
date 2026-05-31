@@ -1,0 +1,35 @@
+export type Phoneme = {
+  sym: string
+  name: string
+  cat: 'vowel' | 'consonant'
+  desc: string
+  tongue: string
+  lips: string
+  jp: string
+  ex: string[]
+  pairs: { a: string; b: string; ia: string; ib: string; ma: string; mb: string }[]
+  trouble: boolean
+}
+
+export const PHONEMES: Phoneme[] = [
+  { sym: '/æ/', name: 'ash', cat: 'vowel', desc: '口を大きく横に開く。日本語にない音。', tongue: 'low-front', lips: 'spread wide', jp: '日本語の「ア」より口を横に広げる', ex: ['cat', 'bad', 'hat', 'apple', 'man', 'hand'], pairs: [{ a: 'cat', b: 'cut', ia: '/kæt/', ib: '/kʌt/', ma: '猫', mb: '切る' }, { a: 'bad', b: 'bed', ia: '/bæd/', ib: '/bɛd/', ma: '悪い', mb: 'ベッド' }], trouble: true },
+  { sym: '/ʌ/', name: 'strut', cat: 'vowel', desc: '口を軽く開け、舌を中央低位に。', tongue: 'central-low', lips: 'neutral', jp: '「ア」と「エ」の中間。力を抜いて', ex: ['cut', 'but', 'sun', 'love', 'blood', 'enough'], pairs: [{ a: 'cut', b: 'cat', ia: '/kʌt/', ib: '/kæt/', ma: '切る', mb: '猫' }, { a: 'cup', b: 'cap', ia: '/kʌp/', ib: '/kæp/', ma: 'カップ', mb: '帽子' }], trouble: false },
+  { sym: '/ɪ/', name: 'kit', cat: 'vowel', desc: '「イ」より口を緩め短く。緊張させない。', tongue: 'high-front-lax', lips: 'slightly spread', jp: '「イ」より力を抜いた短い音', ex: ['bit', 'sit', 'him', 'it', 'big', 'fish'], pairs: [{ a: 'bit', b: 'beat', ia: '/bɪt/', ib: '/biːt/', ma: '少し', mb: '打つ' }, { a: 'ship', b: 'sheep', ia: '/ʃɪp/', ib: '/ʃiːp/', ma: '船', mb: '羊' }], trouble: true },
+  { sym: '/iː/', name: 'fleece', cat: 'vowel', desc: '「イー」と長く伸ばす。口を横に広げる。', tongue: 'high-front', lips: 'spread tense', jp: '「イー」と長く明確に伸ばす', ex: ['beat', 'see', 'feel', 'eat', 'green', 'these'], pairs: [{ a: 'beat', b: 'bit', ia: '/biːt/', ib: '/bɪt/', ma: '打つ', mb: '少し' }, { a: 'sheep', b: 'ship', ia: '/ʃiːp/', ib: '/ʃɪp/', ma: '羊', mb: '船' }], trouble: false },
+  { sym: '/uː/', name: 'goose', cat: 'vowel', desc: '唇を丸めて突き出す。「ウー」と長く。', tongue: 'high-back', lips: 'rounded protruded', jp: '唇をしっかり丸めて「ウー」', ex: ['food', 'moon', 'blue', 'true', 'shoe', 'through'], pairs: [{ a: 'food', b: 'foot', ia: '/fuːd/', ib: '/fʊt/', ma: '食べ物', mb: '足' }, { a: 'pool', b: 'pull', ia: '/puːl/', ib: '/pʊl/', ma: 'プール', mb: '引く' }], trouble: false },
+  { sym: '/ʊ/', name: 'foot', cat: 'vowel', desc: '「ウ」を短く力を抜いて。唇は軽く丸める。', tongue: 'high-back-lax', lips: 'slightly rounded', jp: '「ウ」より短く緩い音', ex: ['foot', 'book', 'good', 'look', 'put', 'full'], pairs: [{ a: 'foot', b: 'food', ia: '/fʊt/', ib: '/fuːd/', ma: '足', mb: '食べ物' }, { a: 'pull', b: 'pool', ia: '/pʊl/', ib: '/puːl/', ma: '引く', mb: 'プール' }], trouble: false },
+  { sym: '/ɛ/', name: 'dress', cat: 'vowel', desc: '「エ」より口を少し大きめに開ける。', tongue: 'mid-front', lips: 'spread', jp: '日本語の「エ」に近いが少し広め', ex: ['bed', 'red', 'set', 'pen', 'end', 'friend'], pairs: [{ a: 'bed', b: 'bad', ia: '/bɛd/', ib: '/bæd/', ma: 'ベッド', mb: '悪い' }, { a: 'pen', b: 'pan', ia: '/pɛn/', ib: '/pæn/', ma: 'ペン', mb: '鍋' }], trouble: false },
+  { sym: '/ɔː/', name: 'thought', cat: 'vowel', desc: '唇を丸め「オー」と長く。後舌を上げる。', tongue: 'back-mid', lips: 'rounded', jp: '唇を丸め「オー」と伸ばす', ex: ['call', 'ball', 'law', 'thought', 'bought', 'caught'], pairs: [{ a: 'caught', b: 'cot', ia: '/kɔːt/', ib: '/kɒt/', ma: '捕まえた', mb: 'ベビーベッド' }, { a: 'ball', b: 'bull', ia: '/bɔːl/', ib: '/bʊl/', ma: 'ボール', mb: '雄牛' }], trouble: false },
+  { sym: '/θ/', name: 'th voiceless', cat: 'consonant', desc: '舌先を上歯の裏に軽く当て空気を出す。声なし。', tongue: 'interdental', lips: 'neutral', jp: '舌先を歯に当てて「ス」のような音', ex: ['think', 'three', 'thin', 'tooth', 'truth', 'both'], pairs: [{ a: 'think', b: 'sink', ia: '/θɪŋk/', ib: '/sɪŋk/', ma: '考える', mb: '沈む' }, { a: 'three', b: 'tree', ia: '/θriː/', ib: '/triː/', ma: '3', mb: '木' }], trouble: true },
+  { sym: '/ð/', name: 'th voiced', cat: 'consonant', desc: '舌先を上歯の裏に当て声を出す。濁り音。', tongue: 'interdental', lips: 'neutral', jp: '舌先を歯に当て声を出す「ザ」に近い', ex: ['this', 'that', 'the', 'they', 'then', 'other'], pairs: [{ a: 'then', b: 'zen', ia: '/ðɛn/', ib: '/zɛn/', ma: 'それから', mb: '禅' }, { a: 'they', b: 'day', ia: '/ðeɪ/', ib: '/deɪ/', ma: '彼ら', mb: '日' }], trouble: true },
+  { sym: '/v/', name: 'v sound', cat: 'consonant', desc: '上の歯を下唇に当て振動させる。', tongue: 'relaxed', lips: 'upper-teeth lower-lip', jp: '上歯を下唇に当てて「ヴ」', ex: ['very', 'live', 'love', 'have', 'voice', 'never'], pairs: [{ a: 'very', b: 'berry', ia: '/vɛri/', ib: '/bɛri/', ma: 'とても', mb: 'ベリー' }, { a: 'van', b: 'ban', ia: '/væn/', ib: '/bæn/', ma: 'バン', mb: '禁止' }], trouble: true },
+  { sym: '/w/', name: 'w sound', cat: 'consonant', desc: '唇を丸くすぼめてから「ワ」と素早く開く。', tongue: 'high-back', lips: 'rounded protruded → open', jp: '唇をすぼめて素早く「ワ」', ex: ['water', 'world', 'what', 'when', 'why', 'always'], pairs: [{ a: 'wine', b: 'vine', ia: '/waɪn/', ib: '/vaɪn/', ma: 'ワイン', mb: 'ツル' }, { a: 'wet', b: 'vet', ia: '/wɛt/', ib: '/vɛt/', ma: '濡れた', mb: '獣医' }], trouble: false },
+  { sym: '/r/', name: 'r sound', cat: 'consonant', desc: '舌を後ろに引き、どこにも触れさせない。', tongue: 'retroflex — touches nothing', lips: 'slightly rounded', jp: '舌をどこにも当てずに巻き上げる', ex: ['red', 'run', 'right', 'try', 'break', 'very'], pairs: [{ a: 'rice', b: 'lice', ia: '/raɪs/', ib: '/laɪs/', ma: '米', mb: 'シラミ' }, { a: 'right', b: 'light', ia: '/raɪt/', ib: '/laɪt/', ma: '正しい', mb: '光' }], trouble: true },
+  { sym: '/l/', name: 'l sound', cat: 'consonant', desc: '舌先を上歯茎にしっかり当てる。', tongue: 'alveolar tip contact', lips: 'neutral', jp: '舌先を歯茎にしっかり当てて「ル」', ex: ['light', 'feel', 'well', 'salt', 'milk', 'world'], pairs: [{ a: 'light', b: 'right', ia: '/laɪt/', ib: '/raɪt/', ma: '光', mb: '正しい' }, { a: 'lice', b: 'rice', ia: '/laɪs/', ib: '/raɪs/', ma: 'シラミ', mb: '米' }], trouble: true },
+  { sym: '/ŋ/', name: 'ng sound', cat: 'consonant', desc: '舌の後ろを上顎に当て鼻から声を出す。', tongue: 'velar nasal', lips: 'neutral', jp: '舌の奥を上顎に当て「ング」の鼻音', ex: ['sing', 'ring', 'long', 'think', 'song', 'hang'], pairs: [{ a: 'sing', b: 'sin', ia: '/sɪŋ/', ib: '/sɪn/', ma: '歌う', mb: '罪' }, { a: 'bang', b: 'ban', ia: '/bæŋ/', ib: '/bæn/', ma: '爆発', mb: '禁止' }], trouble: true },
+  { sym: '/dʒ/', name: 'dg sound', cat: 'consonant', desc: '「ジ」より舌先を前に。破裂してから摩擦。', tongue: 'alveolar-palatal', lips: 'slightly rounded', jp: '「ジュ」と破裂させてから摩擦', ex: ['job', 'age', 'jump', 'judge', 'bridge', 'edge'], pairs: [{ a: 'job', b: 'yob', ia: '/dʒɒb/', ib: '/jɒb/', ma: '仕事', mb: '若者' }, { a: 'jot', b: 'yacht', ia: '/dʒɒt/', ib: '/jɒt/', ma: 'メモ', mb: 'ヨット' }], trouble: false },
+  { sym: '/tʃ/', name: 'ch sound', cat: 'consonant', desc: '舌先を歯茎に当て一気に「チ」と弾く。', tongue: 'alveolar-palatal', lips: 'slightly rounded', jp: '「チ」と弾くように出す', ex: ['chair', 'check', 'lunch', 'watch', 'match', 'beach'], pairs: [{ a: 'chair', b: 'share', ia: '/tʃɛr/', ib: '/ʃɛr/', ma: '椅子', mb: '分ける' }, { a: 'chin', b: 'shin', ia: '/tʃɪn/', ib: '/ʃɪn/', ma: 'あご', mb: 'すね' }], trouble: false },
+  { sym: '/ʃ/', name: 'sh sound', cat: 'consonant', desc: '唇を少し丸め「シュ」と空気を出す。', tongue: 'palatal', lips: 'slightly rounded', jp: '唇を少し丸めて「シュー」', ex: ['she', 'show', 'push', 'wash', 'fish', 'nation'], pairs: [{ a: 'ship', b: 'chip', ia: '/ʃɪp/', ib: '/tʃɪp/', ma: '船', mb: 'チップ' }, { a: 'shoe', b: 'chew', ia: '/ʃuː/', ib: '/tʃuː/', ma: '靴', mb: '噛む' }], trouble: false },
+]
+
+export const TROUBLE_SYMBOLS = PHONEMES.filter(p => p.trouble).map(p => p.sym)

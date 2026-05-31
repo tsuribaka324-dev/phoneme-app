@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-body), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: #2563EB22;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #E8E5DF; border-radius: 99px; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-paper-border
+           text-sm font-medium text-ink transition-all duration-150
+           hover:bg-paper-warm active:scale-[0.98] cursor-pointer select-none;
+  }
+  .btn-primary {
+    @apply bg-ink text-paper border-ink hover:bg-ink-soft hover:border-ink-soft;
+  }
+  .btn-danger {
+    @apply bg-red-50 text-red-700 border-red-200 hover:bg-red-100;
+  }
+  .card {
+    @apply bg-white border border-paper-border rounded-2xl p-5;
+  }
+  .phoneme-chip {
+    @apply flex flex-col items-center justify-center px-2 py-3 rounded-xl
+           border border-paper-border bg-white cursor-pointer
+           transition-all duration-150 hover:border-accent hover:bg-accent-light
+           text-center min-w-[64px];
+  }
+  .phoneme-chip.mastered {
+    @apply border-emerald-300 bg-emerald-50;
+  }
+  .phoneme-chip.struggling {
+    @apply border-amber-300 bg-amber-50;
+  }
+  .phoneme-chip.selected {
+    @apply border-accent bg-accent-light ring-2 ring-accent ring-offset-1;
+  }
+  .status-bar {
+    @apply flex items-center gap-3 px-4 py-3 bg-paper-warm rounded-xl
+           text-sm text-ink-muted mt-3 min-h-[44px];
+  }
+  .section-label {
+    @apply text-[11px] font-medium uppercase tracking-widest text-ink-faint mb-3;
+  }
+}
