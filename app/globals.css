@@ -8,53 +8,63 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  ::selection {
-    background: #2563EB22;
-  }
+  ::selection { background: #534AB722; }
 
-  ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-  }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #E8E5DF; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb { background: #CECBF6; border-radius: 99px; }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-paper-border
+    @apply inline-flex items-center gap-2 px-5 py-2 rounded-full border border-paper-border
            text-sm font-medium text-ink transition-all duration-150
            hover:bg-paper-warm active:scale-[0.98] cursor-pointer select-none;
   }
   .btn-primary {
-    @apply bg-ink text-paper border-ink hover:bg-ink-soft hover:border-ink-soft;
+    @apply bg-violet-600 text-white border-violet-600 hover:bg-violet-700 hover:border-violet-700;
+  }
+  .btn-green {
+    @apply bg-emerald-500 text-white border-emerald-500 hover:bg-emerald-600;
   }
   .btn-danger {
     @apply bg-red-50 text-red-700 border-red-200 hover:bg-red-100;
+  }
+  .btn-ghost {
+    @apply bg-violet-50 text-violet-700 border-violet-100 hover:bg-violet-100;
   }
   .card {
     @apply bg-white border border-paper-border rounded-2xl p-5;
   }
   .phoneme-chip {
     @apply flex flex-col items-center justify-center px-2 py-3 rounded-xl
-           border border-paper-border bg-white cursor-pointer
-           transition-all duration-150 hover:border-accent hover:bg-accent-light
-           text-center min-w-[64px];
+           cursor-pointer transition-all duration-150 hover:scale-105
+           text-center;
   }
-  .phoneme-chip.mastered {
-    @apply border-emerald-300 bg-emerald-50;
-  }
-  .phoneme-chip.struggling {
-    @apply border-amber-300 bg-amber-50;
-  }
+  .ph-color-0 { @apply bg-violet-50 text-violet-800; }
+  .ph-color-1 { @apply bg-emerald-50 text-emerald-800; }
+  .ph-color-2 { @apply bg-pink-50 text-pink-800; }
+  .ph-color-3 { @apply bg-blue-50 text-blue-800; }
+  .ph-color-4 { @apply bg-amber-50 text-amber-800; }
+  .ph-color-5 { @apply bg-green-50 text-green-800; }
   .phoneme-chip.selected {
-    @apply border-accent bg-accent-light ring-2 ring-accent ring-offset-1;
+    @apply ring-2 ring-violet-400 ring-offset-1 scale-105;
   }
   .status-bar {
-    @apply flex items-center gap-3 px-4 py-3 bg-paper-warm rounded-xl
+    @apply flex items-center gap-3 px-4 py-3 bg-paper-warm rounded-2xl
            text-sm text-ink-muted mt-3 min-h-[44px];
   }
   .section-label {
     @apply text-[11px] font-medium uppercase tracking-widest text-ink-faint mb-3;
   }
+  .word-chip {
+    @apply px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer
+           transition-all hover:scale-105 active:scale-95;
+  }
+  .wc-0 { @apply bg-violet-50 text-violet-700 hover:bg-violet-100; }
+  .wc-1 { @apply bg-emerald-50 text-emerald-700 hover:bg-emerald-100; }
+  .wc-2 { @apply bg-pink-50 text-pink-700 hover:bg-pink-100; }
+  .wc-3 { @apply bg-blue-50 text-blue-700 hover:bg-blue-100; }
+  .wc-4 { @apply bg-amber-50 text-amber-700 hover:bg-amber-100; }
+  .wc-5 { @apply bg-green-50 text-green-700 hover:bg-green-100; }
 }

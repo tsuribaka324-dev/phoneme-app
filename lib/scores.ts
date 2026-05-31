@@ -59,14 +59,12 @@ export function similarity(a: string, b: string): number {
   return (longer.length - dist) / longer.length
 }
 
-// 音素ごとの判定：例単語のどれかに近ければOK（閾値を緩めに）
 export function evalPhoneme(spoken: string, exWords: string[]): { ok: boolean; best: number } {
   const s = spoken.toLowerCase().trim()
   let best = 0
   for (const w of exWords) {
     const score = similarity(s, w.toLowerCase())
     if (score > best) best = score
-    // 部分一致も考慮（例：「bad」と言って「bad」が含まれていればOK）
     if (s.includes(w.toLowerCase()) || w.toLowerCase().includes(s)) {
       best = Math.max(best, 0.85)
     }
