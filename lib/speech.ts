@@ -16,12 +16,15 @@ export function useSpeech() {
       }
       if (voices[0]) { voiceRef.current = voices[0]; setVoiceName(voices[0].name) }
     }
-    if (speechSynthesis.getVoices().length) load()
-    else speechSynthesis.addEventListener('voiceschanged', load)
-    return () => speechSynthesis.removeEventListener('voiceschanged', load)
+    if (typeof window !== 'undefined') {
+      if (speechSynthesis.getVoices().length) load()
+      else speechSynthesis.addEventListener('voiceschanged', load)
+      return () => speechSynthesis.removeEventListener('voiceschanged', load)
+    }
   }, [])
 
   const speak = (text: string, rate = 0.9) => {
+    if (typeof window === 'undefined') return
     speechSynthesis.cancel()
     const u = new SpeechSynthesisUtterance(text)
     u.lang = 'en-US'
@@ -35,37 +38,44 @@ export function useSpeech() {
 }
 
 export function useSpeechRecognition(onResult: (transcript: string, isFinal: boolean) => void) {
-  const recRef = useRef<SpeechRecognition | null>(null)
+  const recRef = useRef<any>(null)
   const [listening, setListening] = useState(false)
-  const [supported, setSupported] = useState(true)
+  const [supported, setSupported] = useState(false)
+  const onResultRef = useRef(onResult)
+  onResultRef.current = onResult
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setSupported('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)
-    }
+    if (typeof window === 'undefined') return
+    setSupported('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)
   }, [])
 
   const start = () => {
-    if (!supported) return
+    if (typeof window === 'undefined' || !supported) return
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-    const rec: SpeechRecognition = new SR()
+    const rec = new SR()
     rec.lang = 'en-US'
     rec.continuous = false
-    rec.interimResults = true
-    rec.onresult = e => {
-      let t = ''
-      for (let i = 0; i < e.results.length; i++) t = e.results[i][0].transcript
-      onResult(t, e.results[0].isFinal)
+    rec.interimResults = false
+    rec.maxAlternatives = 1
+    rec.onstart = () => { setListening(true) }
+    rec.onresult = (e: any) => {
+      try {
+        const transcript = e.results[0][0].transcript
+        onResultRef.current(transcript, true)
+      } catch {}
     }
-    rec.onerror = () => { setListening(false) }
+    rec.onspeechend = () => { try { rec.stop() } catch {} }
+    rec.onerror = (e: any) => {
+      if (e.error === 'not-allowed') onResultRef.current('マイクの許可が必要です', true)
+      setListening(false)
+    }
     rec.onend = () => { setListening(false) }
     recRef.current = rec
-    rec.start()
-    setListening(true)
+    try { rec.start() } catch { setListening(false) }
   }
 
   const stop = () => {
-    recRef.current?.stop()
+    try { recRef.current?.stop() } catch {}
     setListening(false)
   }
 
