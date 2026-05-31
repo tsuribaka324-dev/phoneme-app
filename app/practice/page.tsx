@@ -34,7 +34,7 @@ export default function PracticePage() {
       const s = similarity(spoken, w.toLowerCase())
       if (s > best) best = s
     }
-    const ok = best >= 0.65
+    const ok = result.ok
     const updated = saveScore(selected.sym, ok)
     setScores(updated)
     const acc = getAccuracy(updated, selected.sym)
